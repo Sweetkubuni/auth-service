@@ -5,6 +5,9 @@ import (
 	"net/http"
 	"os"
 
+	"auth-service/login"
+	"auth-service/register"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/rs/zerolog"
@@ -59,6 +62,8 @@ func router(logger zerolog.Logger) http.Handler {
 
 	// Public routes
 	r.Group(func(r chi.Router) {
+		r.Post("/register", register.RegisterHandler)
+		r.Post("/login", login.LoginHandler)
 		r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			logger.Info().Msg("Welcome anonymous")
 			w.Write([]byte("welcome anonymous"))
