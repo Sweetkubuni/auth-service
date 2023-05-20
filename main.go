@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"os"
 
-	"auth-service/login"
-	"auth-service/register"
+	"auth-service/database"
+	"auth-service/handlers"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/jwtauth/v5"
@@ -26,6 +26,11 @@ func init() {
 }
 
 func main() {
+
+	// Initialize Database
+	database.Connect("root:root@tcp(localhost:3306)/jwt_demo?parseTime=true")
+	database.Migrate()
+
 	addr := ":3333"
 	fmt.Printf("Starting server on %v\n", addr)
 
@@ -62,8 +67,8 @@ func router(logger zerolog.Logger) http.Handler {
 
 	// Public routes
 	r.Group(func(r chi.Router) {
-		r.Post("/register", register.RegisterHandler)
-		r.Post("/login", login.LoginHandler)
+		r.Post("/register", handlers.RegisterHandler)
+		r.Post("/login", handlers.LoginHandler)
 		r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 			logger.Info().Msg("Welcome anonymous")
 			w.Write([]byte("welcome anonymous"))
