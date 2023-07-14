@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterUser(context *gin.Context) {
+func (app *App) RegisterUser(context *gin.Context) {
 	var user models.User
 	if err := context.ShouldBindJSON(&user); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
