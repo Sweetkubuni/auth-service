@@ -1,0 +1,18 @@
+version: '3.6'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    ports: 
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: 'jwt_demo'
+      MYSQL_USER: 'auth_user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    volumes:
+      - my-db:/var/lib/mysql'
+
+volumes:
+  my-db:

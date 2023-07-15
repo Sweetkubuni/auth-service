@@ -14,7 +14,7 @@ type TokenRequest struct {
 	Password string `json:"password"`
 }
 
-func GenerateToken(context *gin.Context) {
+func (app *App) GenerateToken(context *gin.Context) {
 	var request TokenRequest
 	var user models.User
 	if err := context.ShouldBindJSON(&request); err != nil {
@@ -35,7 +35,7 @@ func GenerateToken(context *gin.Context) {
 		context.Abort()
 		return
 	}
-	tokenString, err := auth.GenerateJWT(user.Email, user.Username)
+	tokenString, err := auth.GenerateJWT(user.Email, user.Username, app.Config.GetAppConfig().JwtSecret)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		context.Abort()
