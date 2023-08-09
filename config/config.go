@@ -19,7 +19,7 @@ type DevelopmentConfig struct {
 	DbHost     string `env:"DB_HOST" envDefault:"mysql"`
 	DbPort     string `env:"DB_PORT" envDefault:"3306"`
 	DbName     string `env:"DB_NAME" envDefault:"jwt_demo"`
-	DbUser     string `env:"DB_USER" envDefault:"admin"`
+	DbUser     string `env:"DB_USER" envDefault:"root"`
 	DbPassword string `env:"DB_PASSWORD" envDefault:"admin"`
 	JwtSecret  string `env:"JWT_SECRET" envDefault:"invisiblekey!"`
 }
@@ -28,7 +28,7 @@ type ProductionConfig struct {
 	DbHost     string `env:"DB_HOST" envDefault:"mysql"`
 	DbPort     string `env:"DB_PORT" envDefault:"3306"`
 	DbName     string `env:"DB_NAME" envDefault:"jwt_demo"`
-	DbUser     string `env:"DB_USER" envDefault:"admin"`
+	DbUser     string `env:"DB_USER" envDefault:"root"`
 	DbPassword string `env:"DB_PASSWORD" envDefault:"admin"`
 	JwtSecret  string `env:"JWT_SECRET" envDefault:"invisiblekey!"`
 }
