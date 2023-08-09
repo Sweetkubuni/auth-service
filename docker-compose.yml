@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   auth-service:
-    build: auth-service
+    build: ./auth-service
     depends_on:
       - mysql-service
     networks:
