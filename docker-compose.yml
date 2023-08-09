@@ -30,4 +30,4 @@ networks:
   streaming_network:
     driver: bridge
 volumes:
-   - my-db:/var/lib/mysql'
+   my-db:/var/lib/mysql
