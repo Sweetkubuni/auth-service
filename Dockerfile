@@ -18,18 +18,9 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o auth_service ./.
 
 FROM alpine:latest
 
-
-ENV DB_HOST=localhost
-ENV DB_PORT=3306
-ENV DB_USER=root
-ENV DB_PASSWORD=password
-ENV DB_NAME=jwt_demo
-
 WORKDIR /app/
 
 COPY --from=0 /app/auth_service ./
-
-EXPOSE 8080
 
 # Command to run the executable
 CMD ["./auth_service"]
