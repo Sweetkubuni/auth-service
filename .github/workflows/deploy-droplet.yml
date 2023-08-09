@@ -22,7 +22,7 @@ jobs:
           key: ${{ secrets.DROPLET_KEY }}
           script: |
             cd ~
-            git pull origin main
+            git clone https://github.com/Callimiro/auth-service.git
             docker build -t auth-service:latest .
             docker stop auth-service || true
             docker rm auth-service || true
