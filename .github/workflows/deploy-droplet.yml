@@ -24,6 +24,7 @@ jobs:
             cd ~
             git clone https://github.com/Callimiro/auth-service.git
             cd auth-service
+            git pull origin main
             docker stop auth-service || true
             docker rm auth-service || true
             docker compose up -d
