@@ -23,6 +23,7 @@ jobs:
           script: |
             cd ~
             git clone https://github.com/Callimiro/auth-service.git
+            cd auth-service
             docker build -t auth-service:latest .
             docker stop auth-service || true
             docker rm auth-service || true
