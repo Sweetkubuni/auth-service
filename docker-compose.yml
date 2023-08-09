@@ -16,7 +16,7 @@ services:
     hostname: mysql
     restart: always
     volumes:
-      - C:/Users/rassi/Sweetkubuni/volume/mysql/data:/var/lib/mysql
+      - my-db:/var/lib/mysql
       #- ./init_sql:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
