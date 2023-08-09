@@ -16,21 +16,21 @@ type Config struct {
 }
 
 type DevelopmentConfig struct {
-	DbHost     string `env:"DB_HOST" envDefault:"localhost"`
-	DbPort     string `env:"DB_PORT" envDefault:"3600"`
+	DbHost     string `env:"DB_HOST" envDefault:"mysql"`
+	DbPort     string `env:"DB_PORT" envDefault:"3306"`
 	DbName     string `env:"DB_NAME" envDefault:"jwt_demo"`
-	DbUser     string `env:"DB_USER" envDefault:"root"`
-	DbPassword string `env:"DB_PASSWORD" envDefault:"password"`
+	DbUser     string `env:"DB_USER" envDefault:"admin"`
+	DbPassword string `env:"DB_PASSWORD" envDefault:"admin"`
 	JwtSecret  string `env:"JWT_SECRET" envDefault:"invisiblekey!"`
 }
 
 type ProductionConfig struct {
-	DbHost     string `env:"DB_HOST" envDefault:"localhost"`
-	DbPort     string `env:"DB_PORT" envDefault:"3600"`
+	DbHost     string `env:"DB_HOST" envDefault:"mysql"`
+	DbPort     string `env:"DB_PORT" envDefault:"3306"`
 	DbName     string `env:"DB_NAME" envDefault:"jwt_demo"`
-	DbUser     string `env:"DB_USER" envDefault:"root"`
-	DbPassword string `env:"DB_PASSWORD" envDefault:"password"`
-	JwtSecret  string `env:"JWT_SECRET" envDefault:"hsaldfhjlaslvgosdhf!"`
+	DbUser     string `env:"DB_USER" envDefault:"admin"`
+	DbPassword string `env:"DB_PASSWORD" envDefault:"admin"`
+	JwtSecret  string `env:"JWT_SECRET" envDefault:"invisiblekey!"`
 }
 
 // DEVELOPMENT CONFIG
