@@ -26,6 +26,4 @@ jobs:
             cd auth-service
             docker stop auth-service || true
             docker rm auth-service || true
-            docker build -t auth-service:latest .
-            docker compose up
-            docker run -d --name auth-service -p 8080:8080 auth-service:latest
+            docker compose up -d
