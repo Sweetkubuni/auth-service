@@ -16,7 +16,7 @@ type Config struct {
 }
 
 type DevelopmentConfig struct {
-	DbHost     string `env:"DB_HOST" envDefault:"mysql"`
+	DbHost     string `env:"DB_HOST" envDefault:"mysql-service"`
 	DbPort     string `env:"DB_PORT" envDefault:"3306"`
 	DbName     string `env:"DB_NAME" envDefault:"jwt_demo"`
 	DbUser     string `env:"DB_USER" envDefault:"root"`
@@ -25,7 +25,7 @@ type DevelopmentConfig struct {
 }
 
 type ProductionConfig struct {
-	DbHost     string `env:"DB_HOST" envDefault:"mysql"`
+	DbHost     string `env:"DB_HOST" envDefault:"mysql-service"`
 	DbPort     string `env:"DB_PORT" envDefault:"3306"`
 	DbName     string `env:"DB_NAME" envDefault:"jwt_demo"`
 	DbUser     string `env:"DB_USER" envDefault:"root"`
