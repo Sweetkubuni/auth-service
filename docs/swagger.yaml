@@ -1,0 +1,136 @@
+basePath: /api
+definitions:
+  controllers.RegisterResponse:
+    properties:
+      email:
+        type: string
+      userId:
+        type: string
+      username:
+        type: string
+    type: object
+  controllers.TokenRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  controllers.TokenResponse:
+    properties:
+      token:
+        type: string
+    type: object
+  models.User:
+    type: object
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api
+host: localhost:9000
+info:
+  contact:
+    email: mail@demothesoftwarepls.com
+    name: API Support
+    url: http://demothesoftwarepls.com/support
+  description: Auth service for jwt authentication
+  termsOfService: http://swagger.io/terms/
+  title: Auth Server
+  version: "1.0"
+paths:
+  /secured/ping:
+    get:
+      description: Returns a pong message
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Ping sucessful
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - ApiKeyAuth: []
+      summary: Ping the secured endpoint
+      tags:
+      - utils
+  /token:
+    post:
+      consumes:
+      - application/json
+      description: Generate a JWT token for a user given their email and password
+      parameters:
+      - description: Credentials for token generation
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.TokenRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Token generated successfully
+          schema:
+            $ref: '#/definitions/controllers.TokenResponse'
+        "400":
+          description: Bad request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Generate a token
+      tags:
+      - auth
+  /user/register:
+    post:
+      consumes:
+      - application/json
+      description: Register a new user in the sytem
+      parameters:
+      - description: User details for registration
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: User created successfully
+          schema:
+            $ref: '#/definitions/controllers.RegisterResponse'
+        "400":
+          description: Bad request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Regiser a new user
+      tags:
+      - auth
+securityDefinitions:
+  Authentication:
+    in: header
+    name: Bearer
+    type: apiKey
+swagger: "2.0"

@@ -8,6 +8,24 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type RegisterResponse struct {
+	UserId   string `json:"userId"`
+	Email    string `json:"email"`
+	Username string `json:"username"`
+}
+
+// RegisterUser godoc
+//
+//	@Summary		Regiser a new user
+//	@Description	Register a new user in the sytem
+//	@Tags			auth
+//	@Accept			json
+//	@Produce		json
+//	@Param			body	body		models.User			true	"User details for registration"
+//	@Success		201		{object}	RegisterResponse	"User created successfully"
+//	@Failure		400		{object}	map[string]string	"Bad request"
+//	@Failure		500		{object}	map[string]string	"Internal Server Error"
+//	@Router			/user/register [post]
 func (app *App) RegisterUser(context *gin.Context) {
 	var user models.User
 	if err := context.ShouldBindJSON(&user); err != nil {

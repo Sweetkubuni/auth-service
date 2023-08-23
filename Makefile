@@ -31,6 +31,7 @@ run/api:
 		DB_USER=${DB_USER} \
 		DB_NAME=${DB_NAME} \
 		JWT_SECRET=${JWT_SECRET} \
+		CORS=${CORS} \
 		go run .
 
 # ==================================================================================== #

@@ -1,18 +1,23 @@
 package config
 
-import "github.com/caarlos0/env"
+import (
+	"strings"
+
+	"github.com/caarlos0/env"
+)
 
 type IConfig interface {
 	GetAppConfig() Config
 }
 
 type Config struct {
-	DbHost     string
-	DbPort     string
-	DbName     string
-	DbUser     string
-	DbPassword string
-	JwtSecret  []byte
+	DbHost         string
+	DbPort         string
+	DbName         string
+	DbUser         string
+	DbPassword     string
+	JwtSecret      []byte
+	TrustedOrigins []string
 }
 
 type DevelopmentConfig struct {
@@ -22,6 +27,7 @@ type DevelopmentConfig struct {
 	DbUser     string `env:"DB_USER" envDefault:"root"`
 	DbPassword string `env:"DB_PASSWORD" envDefault:"password"`
 	JwtSecret  string `env:"JWT_SECRET" envDefault:"invisiblekey!"`
+	Cors       string `env:"CORS" envDefault:"*"`
 }
 
 type ProductionConfig struct {
@@ -31,6 +37,7 @@ type ProductionConfig struct {
 	DbUser     string `env:"DB_USER" envDefault:"root"`
 	DbPassword string `env:"DB_PASSWORD" envDefault:"password"`
 	JwtSecret  string `env:"JWT_SECRET" envDefault:"hsaldfhjlaslvgosdhf!"`
+	Cors       string `env:"CORS" envDefault:"localhost:8080"`
 }
 
 // DEVELOPMENT CONFIG
@@ -39,13 +46,16 @@ func NewDevelopmentConfig() IConfig {
 }
 
 func (dev DevelopmentConfig) GetAppConfig() Config {
+	origins := strings.Split(dev.Cors, ",")
+
 	return Config{
-		DbHost:     dev.DbHost,
-		DbPort:     dev.DbPort,
-		DbName:     dev.DbName,
-		DbUser:     dev.DbUser,
-		DbPassword: dev.DbPassword,
-		JwtSecret:  []byte(dev.JwtSecret),
+		DbHost:         dev.DbHost,
+		DbPort:         dev.DbPort,
+		DbName:         dev.DbName,
+		DbUser:         dev.DbUser,
+		DbPassword:     dev.DbPassword,
+		JwtSecret:      []byte(dev.JwtSecret),
+		TrustedOrigins: origins,
 	}
 }
 
@@ -55,13 +65,15 @@ func NewProductionConfig() IConfig {
 }
 
 func (dev ProductionConfig) GetAppConfig() Config {
+	origins := strings.Split(dev.Cors, ",")
 	return Config{
-		DbHost:     dev.DbHost,
-		DbPort:     dev.DbPort,
-		DbName:     dev.DbName,
-		DbUser:     dev.DbUser,
-		DbPassword: dev.DbPassword,
-		JwtSecret:  []byte(dev.JwtSecret),
+		DbHost:         dev.DbHost,
+		DbPort:         dev.DbPort,
+		DbName:         dev.DbName,
+		DbUser:         dev.DbUser,
+		DbPassword:     dev.DbPassword,
+		JwtSecret:      []byte(dev.JwtSecret),
+		TrustedOrigins: origins,
 	}
 }
 
