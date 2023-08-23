@@ -34,7 +34,7 @@ func main() {
 	database.Migrate()
 	// Initialize Router
 	router := initRouter(appCfg)
-	router.Run(":8080")
+	router.Run(":9000")
 }
 func initRouter(appCfg config.IConfig) *gin.Engine {
 	router := gin.Default()

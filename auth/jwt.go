@@ -8,14 +8,16 @@ import (
 )
 
 type JWTClaim struct {
+	UserId   int    `json:"user_id"`
 	Username string `json:"username"`
 	Email    string `json:"email"`
 	jwt.StandardClaims
 }
 
-func GenerateJWT(email string, username string, jwtKey []byte) (tokenString string, err error) {
+func GenerateJWT(id int, email string, username string, jwtKey []byte) (tokenString string, err error) {
 	expirationTime := time.Now().Add(1 * time.Hour)
 	claims := &JWTClaim{
+		UserId:   id,
 		Email:    email,
 		Username: username,
 		StandardClaims: jwt.StandardClaims{
@@ -23,6 +25,7 @@ func GenerateJWT(email string, username string, jwtKey []byte) (tokenString stri
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+
 	tokenString, err = token.SignedString(jwtKey)
 	return
 }
