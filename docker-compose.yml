@@ -11,6 +11,7 @@ services:
       MYSQL_USER: 'auth_user'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
+      JWT_SECRET: 'invisiblekey!'
     volumes:
       - my-db:/var/lib/mysql'
 
