@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -41,6 +42,14 @@ func initRouter(appCfg config.IConfig) *gin.Engine {
 	app := controllers.App{
 		Config: appCfg,
 	}
+
+	router.Use(cors.New(cors.Config{
+		AllowOrigins: app.Config.GetAppConfig().TrustedOrigins,
+		AllowMethods: []string{"PUT", "PATCH", "GET", "POST", "OPTIONS"},
+		AllowHeaders: []string{
+			"Authorization", "Content-Type", "Origin",
+		},
+	}))
 
 	api := router.Group("/api")
 	{
