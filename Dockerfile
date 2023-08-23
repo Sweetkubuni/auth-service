@@ -24,6 +24,7 @@ ENV DB_PORT=3306
 ENV DB_USER=root
 ENV DB_PASSWORD=password
 ENV DB_NAME=jwt_demo
+ENV JWT_SECRET=invisiblekey!
 
 WORKDIR /app/
 
