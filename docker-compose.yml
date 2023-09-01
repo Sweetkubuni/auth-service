@@ -1,19 +1,36 @@
 version: '3.6'
 
 services:
-  db:
-    image: mysql:8.0
+  auth-service:
+    build: .
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mysql-service
+    networks:
+      - streaming_network
+  mysql-service:
+    container_name: mysql-service
+    networks:
+      - streaming_network
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    hostname: mysql
     restart: always
-    ports: 
+    volumes:
+      - my-db:/var/lib/mysql
+      #- ./init_sql:/docker-entrypoint-initdb.d
+    ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: 'jwt_demo'
-      MYSQL_USER: 'auth_user'
-      MYSQL_PASSWORD: 'password'
-      MYSQL_ROOT_PASSWORD: 'password'
-      JWT_SECRET: 'invisiblekey!'
-    volumes:
-      - my-db:/var/lib/mysql'
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: admin 
+      #MYSQL_VERSION: 5.7
+      MYSQL_DATABASE: jwt_demo     
+
+networks:
+  streaming_network:
+    driver: bridge
 
 volumes:
   my-db:
